@@ -117,7 +117,7 @@ export default function Index() {
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00F5FF] to-[#BF5FFF] flex items-center justify-center">
               <Icon name="Zap" size={16} className="text-black" />
             </div>
-            <span className="font-oswald text-xl font-bold tracking-widest uppercase text-white">APEX</span>
+            <span className="font-oswald text-xl font-bold tracking-widest uppercase text-white">TELERU</span>
           </div>
 
           <div className="hidden md:flex items-center gap-8">
@@ -450,9 +450,9 @@ export default function Index() {
             <div className="w-6 h-6 rounded bg-gradient-to-br from-[#00F5FF] to-[#BF5FFF] flex items-center justify-center">
               <Icon name="Zap" size={12} className="text-black" />
             </div>
-            <span className="font-oswald font-bold tracking-widest text-sm text-white uppercase">APEX</span>
+            <span className="font-oswald font-bold tracking-widest text-sm text-white uppercase">TELERU</span>
           </div>
-          <p className="text-white/25 text-xs">© 2026 APEX. Все права защищены.</p>
+          <p className="text-white/25 text-xs">© 2026 TELERU. Все права защищены.</p>
           <div className="flex items-center gap-5">
             {["Instagram", "Send", "Youtube"].map((ic, i) => (
               <button key={i} className="text-white/30 hover:text-[#00F5FF] transition-colors">
