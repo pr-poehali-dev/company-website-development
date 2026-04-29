@@ -18,6 +18,15 @@ export default function Index() {
             backgroundSize: "60px 60px"
           }}
         />
+
+        <div className="relative z-10 min-h-screen flex items-center justify-center">
+          <button
+            type="button"
+            className="px-10 py-4 rounded-full border border-[#00F5FF]/40 bg-[#00F5FF]/10 backdrop-blur-md text-[#00F5FF] text-lg font-medium tracking-wide hover:bg-[#00F5FF]/20 hover:border-[#00F5FF] transition-all duration-300 shadow-[0_0_30px_rgba(0,245,255,0.3)] hover:shadow-[0_0_50px_rgba(0,245,255,0.6)]"
+          >
+            О проекте
+          </button>
+        </div>
       </section>
     </div>
   );
