@@ -4,49 +4,12 @@ import Icon from "@/components/ui/icon";
 const HERO_BG = "https://cdn.poehali.dev/projects/be3af159-61a7-4285-ad2a-e331900f8558/files/607ae091-93a1-463b-8f84-07b929c0a46f.jpg";
 
 const services = [
-  {
-    icon: "Rocket",
-    title: "Стратегия и рост",
-    desc: "Разрабатываем стратегии, которые дают измеримый результат. Ваш бизнес выходит на новый уровень.",
-    color: "#00F5FF",
-  },
-  {
-    icon: "Layers",
-    title: "Дизайн и брендинг",
-    desc: "Создаём визуальные решения, которые запоминаются. Фирменный стиль с характером.",
-    color: "#BF5FFF",
-  },
-  {
-    icon: "BarChart2",
-    title: "Аналитика и данные",
-    desc: "Превращаем данные в решения. Реальные инсайты для роста вашего бизнеса.",
-    color: "#AAFF00",
-  },
-  {
-    icon: "Globe",
-    title: "Цифровой маркетинг",
-    desc: "SEO, таргет, контент — комплексное продвижение в digital-среде.",
-    color: "#FF6B6B",
-  },
-  {
-    icon: "Code2",
-    title: "Разработка продуктов",
-    desc: "Сайты, приложения, автоматизация. Технологии на службе вашего бизнеса.",
-    color: "#FFD700",
-  },
-  {
-    icon: "Users",
-    title: "Консалтинг",
-    desc: "Экспертная поддержка на каждом этапе. Мы — ваша команда роста.",
-    color: "#00F5FF",
-  },
-];
-
-const stats = [
-  { value: "150+", label: "Проектов запущено" },
-  { value: "8 лет", label: "На рынке" },
-  { value: "97%", label: "Довольных клиентов" },
-  { value: "40+", label: "Специалистов" },
+  { icon: "Rocket", color: "#00F5FF" },
+  { icon: "Layers", color: "#BF5FFF" },
+  { icon: "BarChart2", color: "#AAFF00" },
+  { icon: "Globe", color: "#FF6B6B" },
+  { icon: "Code2", color: "#FFD700" },
+  { icon: "Users", color: "#00F5FF" },
 ];
 
 function useInView(ref: React.RefObject<HTMLElement>, threshold = 0.15) {
@@ -77,7 +40,6 @@ function AnimatedSection({ children, className = "" }: { children: React.ReactNo
 }
 
 export default function Index() {
-  const [activeSection, setActiveSection] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
   const [formData, setFormData] = useState({ name: "", phone: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
@@ -90,7 +52,6 @@ export default function Index() {
   }, []);
 
   const scrollTo = (id: string) => {
-    setActiveSection(id);
     setMenuOpen(false);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
@@ -101,10 +62,10 @@ export default function Index() {
   };
 
   const navLinks = [
-    { id: "home", label: "Главная" },
-    { id: "services", label: "Услуги" },
-    { id: "about", label: "О компании" },
-    { id: "contacts", label: "Контакты" },
+    { id: "home" },
+    { id: "services" },
+    { id: "about" },
+    { id: "contacts" },
   ];
 
   return (
@@ -117,7 +78,6 @@ export default function Index() {
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00F5FF] to-[#BF5FFF] flex items-center justify-center">
               <Icon name="Zap" size={16} className="text-black" />
             </div>
-            <span className="font-oswald text-xl font-bold tracking-widest uppercase text-white">TELERU</span>
           </div>
 
           <div className="hidden md:flex items-center gap-8">
@@ -125,18 +85,16 @@ export default function Index() {
               <button
                 key={l.id}
                 onClick={() => scrollTo(l.id)}
-                className={`text-sm font-medium tracking-wide transition-all duration-200 ${activeSection === l.id ? "text-[#00F5FF]" : "text-white/60 hover:text-white"}`}
-              >
-                {l.label}
-              </button>
+                className="w-8 h-8 rounded-full border border-white/20 hover:border-[#00F5FF]/50 transition-all duration-200"
+              />
             ))}
           </div>
 
           <button
             onClick={() => scrollTo("contacts")}
-            className="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#00F5FF] to-[#BF5FFF] text-black font-semibold text-sm hover:scale-105 transition-transform"
+            className="hidden md:flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-r from-[#00F5FF] to-[#BF5FFF] hover:scale-105 transition-transform"
           >
-            Связаться
+            <Icon name="ArrowRight" size={16} className="text-black" />
           </button>
 
           <button className="md:hidden text-white" onClick={() => setMenuOpen(!menuOpen)}>
@@ -147,9 +105,7 @@ export default function Index() {
         {menuOpen && (
           <div className="md:hidden bg-[#0D0F1A] border-t border-white/10 px-6 py-4 flex flex-col gap-4">
             {navLinks.map((l) => (
-              <button key={l.id} onClick={() => scrollTo(l.id)} className="text-left text-white/80 hover:text-[#00F5FF] transition-colors font-medium">
-                {l.label}
-              </button>
+              <button key={l.id} onClick={() => scrollTo(l.id)} className="w-8 h-8 rounded-full border border-white/20 hover:border-[#00F5FF]/50 transition-colors" />
             ))}
           </div>
         )}
@@ -157,10 +113,7 @@ export default function Index() {
 
       {/* HERO */}
       <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-25"
-          style={{ backgroundImage: `url(${HERO_BG})` }}
-        />
+        <div className="absolute inset-0 bg-cover bg-center opacity-25" style={{ backgroundImage: `url(${HERO_BG})` }} />
         <div className="absolute inset-0 bg-gradient-to-b from-[#07080D]/30 via-transparent to-[#07080D]" />
 
         <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-[#00F5FF]/15 rounded-full blur-[100px] animate-glow-pulse" />
@@ -176,43 +129,27 @@ export default function Index() {
         />
 
         <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#00F5FF]/30 bg-[#00F5FF]/5 text-[#00F5FF] text-sm font-medium mb-8 animate-fade-in">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#00F5FF]/30 bg-[#00F5FF]/5 mb-8 animate-fade-in">
             <span className="w-2 h-2 rounded-full bg-[#00F5FF] animate-pulse" />
-            Новый уровень вашего бизнеса
           </div>
 
-          <h1 className="font-oswald text-6xl md:text-8xl lg:text-[110px] font-bold leading-none tracking-tight mb-6 animate-fade-in" style={{ animationDelay: "0.2s", opacity: 0 }}>
-            <span className="block text-white">МЫ ДЕЛАЕМ</span>
-            <span
-              className="block"
-              style={{
-                background: "linear-gradient(135deg, #00F5FF 0%, #BF5FFF 50%, #AAFF00 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text"
-              }}
-            >
-              РЕЗУЛЬТАТ
-            </span>
-          </h1>
-
-          <p className="text-white/60 text-lg md:text-xl max-w-2xl mx-auto mb-10 animate-fade-in" style={{ animationDelay: "0.4s", opacity: 0 }}>
-            Комплексные решения для бизнеса: стратегия, дизайн, digital-маркетинг и разработка продуктов под ключ.
-          </p>
+          <div className="flex flex-col items-center gap-2 mb-10 animate-fade-in" style={{ animationDelay: "0.2s", opacity: 0 }}>
+            <div className="w-48 h-16 rounded-2xl" style={{ background: "linear-gradient(135deg, rgba(0,245,255,0.15) 0%, rgba(191,95,255,0.15) 50%, rgba(170,255,0,0.15) 100%)" }} />
+            <div className="w-64 h-16 rounded-2xl" style={{ background: "linear-gradient(135deg, #00F5FF 0%, #BF5FFF 50%, #AAFF00 100%)", opacity: 0.3 }} />
+          </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in" style={{ animationDelay: "0.6s", opacity: 0 }}>
             <button
               onClick={() => scrollTo("contacts")}
-              className="group flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-[#00F5FF] to-[#BF5FFF] text-black font-bold text-base hover:scale-105 transition-all duration-300 shadow-[0_0_40px_rgba(0,245,255,0.3)]"
+              className="group flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-[#00F5FF] to-[#BF5FFF] text-black font-bold hover:scale-105 transition-all duration-300 shadow-[0_0_40px_rgba(0,245,255,0.3)]"
             >
-              Получить консультацию
               <Icon name="ArrowRight" size={18} className="group-hover:translate-x-1 transition-transform" />
             </button>
             <button
               onClick={() => scrollTo("services")}
-              className="flex items-center gap-2 px-8 py-4 rounded-full border border-white/20 text-white font-medium text-base hover:border-[#00F5FF]/50 hover:bg-white/5 transition-all duration-300"
+              className="flex items-center gap-2 px-8 py-4 rounded-full border border-white/20 hover:border-[#00F5FF]/50 hover:bg-white/5 transition-all duration-300"
             >
-              Наши услуги
+              <Icon name="ChevronDown" size={18} className="text-white" />
             </button>
           </div>
         </div>
@@ -228,7 +165,7 @@ export default function Index() {
       <section className="py-16 border-y border-white/5 bg-[#0D0F1A]/50">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((s, i) => (
+            {["150+", "8", "97%", "40+"].map((v, i) => (
               <AnimatedSection key={i} className="text-center">
                 <div
                   className="font-oswald text-4xl md:text-5xl font-bold mb-1"
@@ -239,9 +176,8 @@ export default function Index() {
                     backgroundClip: "text"
                   }}
                 >
-                  {s.value}
+                  {v}
                 </div>
-                <div className="text-white/50 text-sm">{s.label}</div>
               </AnimatedSection>
             ))}
           </div>
@@ -252,18 +188,13 @@ export default function Index() {
       <section id="services" className="py-28 px-6">
         <div className="max-w-6xl mx-auto">
           <AnimatedSection className="text-center mb-16">
-            <span className="text-[#00F5FF] text-sm font-semibold tracking-[0.2em] uppercase mb-4 block">Что мы делаем</span>
-            <h2 className="font-oswald text-5xl md:text-6xl font-bold text-white mb-4">НАШИ УСЛУГИ</h2>
-            <p className="text-white/50 text-lg max-w-xl mx-auto">Полный спектр digital-решений для роста и масштабирования вашего бизнеса</p>
+            <div className="w-12 h-1 rounded-full mx-auto" style={{ background: "linear-gradient(90deg,#00F5FF,#BF5FFF)" }} />
           </AnimatedSection>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((s, i) => (
               <AnimatedSection key={i}>
-                <div
-                  className="group relative p-7 rounded-2xl border border-white/8 bg-[#0D0F1A] hover:border-white/20 transition-all duration-400 cursor-default overflow-hidden"
-                  style={{ transitionDelay: `${i * 60}ms` }}
-                >
+                <div className="group relative p-7 rounded-2xl border border-white/8 bg-[#0D0F1A] hover:border-white/20 transition-all duration-400 cursor-default overflow-hidden">
                   <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 rounded-2xl"
                     style={{ background: `radial-gradient(circle at 30% 30%, ${s.color}10 0%, transparent 60%)` }}
@@ -274,10 +205,14 @@ export default function Index() {
                   >
                     <Icon name={s.icon as "Rocket"} size={22} style={{ color: s.color }} />
                   </div>
-                  <h3 className="font-oswald text-xl font-semibold text-white mb-3 group-hover:text-[#00F5FF] transition-colors">{s.title}</h3>
-                  <p className="text-white/50 text-sm leading-relaxed">{s.desc}</p>
-                  <div className="mt-5 flex items-center gap-2 text-sm font-medium" style={{ color: s.color }}>
-                    Подробнее <Icon name="ArrowRight" size={14} />
+                  <div className="w-24 h-3 rounded-full bg-white/10 mb-3" />
+                  <div className="space-y-2">
+                    <div className="w-full h-2 rounded-full bg-white/5" />
+                    <div className="w-4/5 h-2 rounded-full bg-white/5" />
+                    <div className="w-3/5 h-2 rounded-full bg-white/5" />
+                  </div>
+                  <div className="mt-5 flex items-center gap-2" style={{ color: s.color }}>
+                    <Icon name="ArrowRight" size={14} />
                   </div>
                 </div>
               </AnimatedSection>
@@ -291,29 +226,29 @@ export default function Index() {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <AnimatedSection>
-              <span className="text-[#BF5FFF] text-sm font-semibold tracking-[0.2em] uppercase mb-4 block">О компании</span>
-              <h2 className="font-oswald text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">МЫ — КОМАНДА<br />
-                <span style={{ background: "linear-gradient(135deg,#BF5FFF,#00F5FF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>РОСТА</span>
-              </h2>
-              <p className="text-white/60 text-base leading-relaxed mb-6">
-                Уже 8 лет мы помогаем компаниям расти и масштабироваться. Наша команда из 40+ специалистов объединяет стратегов, дизайнеров, разработчиков и маркетологов.
-              </p>
-              <p className="text-white/60 text-base leading-relaxed mb-8">
-                Мы не просто выполняем задачи — мы становимся частью вашего бизнеса, разделяем ваши цели и вместе достигаем результатов.
-              </p>
+              <div className="w-16 h-1 rounded-full mb-6" style={{ background: "linear-gradient(90deg,#BF5FFF,#00F5FF)" }} />
+              <div className="space-y-3 mb-6">
+                <div className="w-3/4 h-10 rounded-xl bg-white/8" />
+                <div className="w-1/2 h-10 rounded-xl" style={{ background: "linear-gradient(135deg,rgba(191,95,255,0.2),rgba(0,245,255,0.2))" }} />
+              </div>
+              <div className="space-y-2 mb-6">
+                <div className="w-full h-2 rounded-full bg-white/8" />
+                <div className="w-full h-2 rounded-full bg-white/8" />
+                <div className="w-2/3 h-2 rounded-full bg-white/8" />
+              </div>
               <div className="flex flex-col gap-4">
-                {["Индивидуальный подход к каждому клиенту", "Прозрачная отчётность и метрики", "Команда экспертов в каждой области"].map((item, i) => (
+                {[0, 1, 2].map((i) => (
                   <div key={i} className="flex items-center gap-3">
                     <div className="w-5 h-5 rounded-full bg-[#AAFF00]/20 border border-[#AAFF00]/40 flex items-center justify-center flex-shrink-0">
                       <Icon name="Check" size={11} className="text-[#AAFF00]" />
                     </div>
-                    <span className="text-white/70 text-sm">{item}</span>
+                    <div className="h-2 rounded-full bg-white/10" style={{ width: `${[70, 60, 75][i]}%` }} />
                   </div>
                 ))}
               </div>
             </AnimatedSection>
 
-            <AnimatedSection className="relative">
+            <AnimatedSection>
               <div className="relative rounded-3xl overflow-hidden bg-[#0D0F1A] border border-white/8 aspect-square max-w-md mx-auto lg:max-w-none">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#00F5FF]/10 to-[#BF5FFF]/10" />
                 <div className="absolute inset-0 flex flex-col items-center justify-center gap-6 p-12">
@@ -328,15 +263,10 @@ export default function Index() {
                       <Icon name="Zap" size={40} className="text-[#00F5FF]" />
                     </div>
                   </div>
-                  <div className="text-center">
-                    <div className="font-oswald text-5xl font-bold text-white mb-1">8+</div>
-                    <div className="text-white/40 text-sm">лет опыта</div>
-                  </div>
                   <div className="grid grid-cols-2 gap-4 w-full">
-                    {[{ v: "150+", l: "Проектов" }, { v: "97%", l: "Довольных" }].map((s, i) => (
+                    {["#00F5FF", "#BF5FFF"].map((c, i) => (
                       <div key={i} className="rounded-xl bg-white/5 border border-white/10 p-4 text-center">
-                        <div className="font-oswald text-2xl font-bold text-[#00F5FF]">{s.v}</div>
-                        <div className="text-white/40 text-xs mt-1">{s.l}</div>
+                        <div className="font-oswald text-2xl font-bold" style={{ color: c }}>{["150+", "97%"][i]}</div>
                       </div>
                     ))}
                   </div>
@@ -351,11 +281,11 @@ export default function Index() {
       <section id="contacts" className="py-28 px-6">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection className="text-center mb-14">
-            <span className="text-[#AAFF00] text-sm font-semibold tracking-[0.2em] uppercase mb-4 block">Связаться с нами</span>
-            <h2 className="font-oswald text-5xl md:text-6xl font-bold text-white mb-4">ДАВАЙТЕ<br />
-              <span style={{ background: "linear-gradient(135deg,#AAFF00,#00F5FF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>ОБСУДИМ</span>
-            </h2>
-            <p className="text-white/50 text-lg max-w-xl mx-auto">Оставьте заявку — мы свяжемся с вами в течение рабочего дня</p>
+            <div className="w-12 h-1 rounded-full mx-auto mb-6" style={{ background: "linear-gradient(90deg,#AAFF00,#00F5FF)" }} />
+            <div className="space-y-3 flex flex-col items-center">
+              <div className="w-48 h-10 rounded-xl bg-white/8" />
+              <div className="w-32 h-10 rounded-xl" style={{ background: "linear-gradient(135deg,rgba(170,255,0,0.2),rgba(0,245,255,0.2))" }} />
+            </div>
           </AnimatedSection>
 
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
@@ -364,31 +294,28 @@ export default function Index() {
                 {!submitted ? (
                   <form onSubmit={handleSubmit} className="bg-[#0D0F1A] rounded-3xl border border-white/8 p-8 flex flex-col gap-5">
                     <div>
-                      <label className="text-white/60 text-sm mb-2 block">Ваше имя</label>
                       <input
                         type="text"
                         required
-                        placeholder="Иван Иванов"
+                        placeholder="—"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-[#00F5FF]/50 transition-colors"
                       />
                     </div>
                     <div>
-                      <label className="text-white/60 text-sm mb-2 block">Телефон или email</label>
                       <input
                         type="text"
                         required
-                        placeholder="+7 (999) 000-00-00"
+                        placeholder="—"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-[#00F5FF]/50 transition-colors"
                       />
                     </div>
                     <div>
-                      <label className="text-white/60 text-sm mb-2 block">Сообщение</label>
                       <textarea
-                        placeholder="Расскажите о вашем проекте..."
+                        placeholder="—"
                         rows={4}
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
@@ -397,22 +324,18 @@ export default function Index() {
                     </div>
                     <button
                       type="submit"
-                      className="w-full py-4 rounded-xl bg-gradient-to-r from-[#00F5FF] to-[#BF5FFF] text-black font-bold text-base hover:scale-[1.02] transition-transform shadow-[0_0_30px_rgba(0,245,255,0.2)] flex items-center justify-center gap-2"
+                      className="w-full py-4 rounded-xl bg-gradient-to-r from-[#00F5FF] to-[#BF5FFF] text-black font-bold hover:scale-[1.02] transition-transform shadow-[0_0_30px_rgba(0,245,255,0.2)] flex items-center justify-center gap-2"
                     >
-                      Отправить заявку
                       <Icon name="Send" size={18} />
                     </button>
-                    <p className="text-white/25 text-xs text-center">Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности</p>
                   </form>
                 ) : (
                   <div className="bg-[#0D0F1A] rounded-3xl border border-[#AAFF00]/20 p-12 flex flex-col items-center justify-center gap-4 text-center min-h-[360px]">
                     <div className="w-16 h-16 rounded-full bg-[#AAFF00]/10 border border-[#AAFF00]/30 flex items-center justify-center">
                       <Icon name="CheckCircle" size={32} className="text-[#AAFF00]" />
                     </div>
-                    <h3 className="font-oswald text-2xl font-bold text-white">Заявка отправлена!</h3>
-                    <p className="text-white/50 text-sm max-w-xs">Мы получили вашу заявку и свяжемся с вами в ближайшее время.</p>
                     <button onClick={() => { setSubmitted(false); setFormData({ name: "", phone: "", message: "" }); }} className="mt-4 text-[#00F5FF] text-sm hover:underline">
-                      Отправить ещё одну
+                      <Icon name="RotateCcw" size={16} />
                     </button>
                   </div>
                 )}
@@ -421,19 +344,19 @@ export default function Index() {
 
             <div className="lg:col-span-2 flex flex-col gap-5">
               {[
-                { icon: "Phone", label: "Телефон", value: "+7 (800) 000-00-00", color: "#00F5FF" },
-                { icon: "Mail", label: "Email", value: "hello@apex.ru", color: "#BF5FFF" },
-                { icon: "MapPin", label: "Адрес", value: "Москва, ул. Примерная, 1", color: "#AAFF00" },
-                { icon: "Clock", label: "Режим работы", value: "Пн–Пт, 9:00–18:00", color: "#FF6B6B" },
+                { icon: "Phone", color: "#00F5FF" },
+                { icon: "Mail", color: "#BF5FFF" },
+                { icon: "MapPin", color: "#AAFF00" },
+                { icon: "Clock", color: "#FF6B6B" },
               ].map((c, i) => (
                 <AnimatedSection key={i}>
                   <div className="flex items-start gap-4 p-5 rounded-2xl bg-[#0D0F1A] border border-white/8 hover:border-white/15 transition-colors">
                     <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: `${c.color}15`, border: `1px solid ${c.color}25` }}>
                       <Icon name={c.icon as "Phone"} size={18} style={{ color: c.color }} />
                     </div>
-                    <div>
-                      <div className="text-white/40 text-xs mb-1">{c.label}</div>
-                      <div className="text-white text-sm font-medium">{c.value}</div>
+                    <div className="flex-1 space-y-1 pt-1">
+                      <div className="w-16 h-2 rounded-full bg-white/10" />
+                      <div className="w-28 h-2 rounded-full bg-white/20" />
                     </div>
                   </div>
                 </AnimatedSection>
@@ -450,9 +373,8 @@ export default function Index() {
             <div className="w-6 h-6 rounded bg-gradient-to-br from-[#00F5FF] to-[#BF5FFF] flex items-center justify-center">
               <Icon name="Zap" size={12} className="text-black" />
             </div>
-            <span className="font-oswald font-bold tracking-widest text-sm text-white uppercase">TELERU</span>
           </div>
-          <p className="text-white/25 text-xs">© 2026 TELERU. Все права защищены.</p>
+          <div className="w-40 h-2 rounded-full bg-white/10" />
           <div className="flex items-center gap-5">
             {["Instagram", "Send", "Youtube"].map((ic, i) => (
               <button key={i} className="text-white/30 hover:text-[#00F5FF] transition-colors">
