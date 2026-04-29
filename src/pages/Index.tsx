@@ -19,7 +19,10 @@ export default function Index() {
           }}
         />
 
-        <div className="relative z-10 min-h-screen flex items-center justify-center px-4">
+        <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 gap-12">
+          <h1 className="text-center font-bold tracking-tighter leading-none text-[18vw] sm:text-[16vw] md:text-[14vw] bg-gradient-to-r from-[#00F5FF] via-[#BF5FFF] to-[#AAFF00] bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(0,245,255,0.5)]">
+            Teleru2023
+          </h1>
           <div className="flex flex-col sm:flex-row gap-4 items-center">
             <button
               type="button"
