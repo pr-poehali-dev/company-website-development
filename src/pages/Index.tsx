@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Icon from "@/components/ui/icon";
 
 const HERO_BG = "https://cdn.poehali.dev/projects/be3af159-61a7-4285-ad2a-e331900f8558/files/607ae091-93a1-463b-8f84-07b929c0a46f.jpg";
@@ -40,9 +40,6 @@ function AnimatedSection({ children, className = "" }: { children: React.ReactNo
 }
 
 export default function Index() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [formData, setFormData] = useState({ name: "", phone: "", message: "" });
-  const [submitted, setSubmitted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -51,64 +48,24 @@ export default function Index() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const scrollTo = (id: string) => {
-    setMenuOpen(false);
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
-
-  const navLinks = [
-    { id: "home" },
-    { id: "services" },
-    { id: "about" },
-    { id: "contacts" },
-  ];
-
   return (
     <div className="min-h-screen bg-[#07080D] font-golos text-white overflow-x-hidden">
 
       {/* NAV */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "bg-[#07080D]/90 backdrop-blur-xl border-b border-white/5 py-3" : "py-6"}`}>
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00F5FF] to-[#BF5FFF] flex items-center justify-center">
-              <Icon name="Zap" size={16} className="text-black" />
-            </div>
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00F5FF] to-[#BF5FFF] flex items-center justify-center">
+            <Icon name="Zap" size={16} className="text-black" />
           </div>
-
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((l) => (
-              <button
-                key={l.id}
-                onClick={() => scrollTo(l.id)}
-                className="w-8 h-8 rounded-full border border-white/20 hover:border-[#00F5FF]/50 transition-all duration-200"
-              />
-            ))}
-          </div>
-
-          <button
-            onClick={() => scrollTo("contacts")}
-            className="hidden md:flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-r from-[#00F5FF] to-[#BF5FFF] hover:scale-105 transition-transform"
+          <a
+            href="https://t.me/teleru2023"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-r from-[#00F5FF] to-[#BF5FFF] hover:scale-110 transition-transform shadow-[0_0_20px_rgba(0,245,255,0.3)]"
           >
-            <Icon name="ArrowRight" size={16} className="text-black" />
-          </button>
-
-          <button className="md:hidden text-white" onClick={() => setMenuOpen(!menuOpen)}>
-            <Icon name={menuOpen ? "X" : "Menu"} size={24} />
-          </button>
+            <Icon name="Send" size={16} className="text-black" />
+          </a>
         </div>
-
-        {menuOpen && (
-          <div className="md:hidden bg-[#0D0F1A] border-t border-white/10 px-6 py-4 flex flex-col gap-4">
-            {navLinks.map((l) => (
-              <button key={l.id} onClick={() => scrollTo(l.id)} className="w-8 h-8 rounded-full border border-white/20 hover:border-[#00F5FF]/50 transition-colors" />
-            ))}
-          </div>
-        )}
       </nav>
 
       {/* HERO */}
@@ -128,36 +85,25 @@ export default function Index() {
           }}
         />
 
-        <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#00F5FF]/30 bg-[#00F5FF]/5 mb-8 animate-fade-in">
+        <div className="relative z-10 max-w-6xl mx-auto px-6 text-center flex flex-col items-center gap-8">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#00F5FF]/30 bg-[#00F5FF]/5 animate-fade-in">
             <span className="w-2 h-2 rounded-full bg-[#00F5FF] animate-pulse" />
           </div>
 
-          <div className="flex flex-col items-center gap-2 mb-10 animate-fade-in" style={{ animationDelay: "0.2s", opacity: 0 }}>
+          <div className="flex flex-col items-center gap-3 animate-fade-in" style={{ animationDelay: "0.2s", opacity: 0 }}>
             <div className="w-48 h-16 rounded-2xl" style={{ background: "linear-gradient(135deg, rgba(0,245,255,0.15) 0%, rgba(191,95,255,0.15) 50%, rgba(170,255,0,0.15) 100%)" }} />
             <div className="w-64 h-16 rounded-2xl" style={{ background: "linear-gradient(135deg, #00F5FF 0%, #BF5FFF 50%, #AAFF00 100%)", opacity: 0.3 }} />
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in" style={{ animationDelay: "0.6s", opacity: 0 }}>
-            <button
-              onClick={() => scrollTo("contacts")}
-              className="group flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-[#00F5FF] to-[#BF5FFF] text-black font-bold hover:scale-105 transition-all duration-300 shadow-[0_0_40px_rgba(0,245,255,0.3)]"
-            >
-              <Icon name="ArrowRight" size={18} className="group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button
-              onClick={() => scrollTo("services")}
-              className="flex items-center gap-2 px-8 py-4 rounded-full border border-white/20 hover:border-[#00F5FF]/50 hover:bg-white/5 transition-all duration-300"
-            >
-              <Icon name="ChevronDown" size={18} className="text-white" />
-            </button>
-          </div>
-        </div>
-
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-float">
-          <button onClick={() => scrollTo("services")} className="text-white/30 hover:text-white/60 transition-colors">
-            <Icon name="ChevronDown" size={32} />
-          </button>
+          <a
+            href="https://t.me/teleru2023"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-3 px-10 py-4 rounded-full bg-gradient-to-r from-[#00F5FF] to-[#BF5FFF] text-black font-bold hover:scale-105 transition-all duration-300 shadow-[0_0_40px_rgba(0,245,255,0.35)] animate-fade-in"
+            style={{ animationDelay: "0.5s", opacity: 0 }}
+          >
+            <Icon name="Send" size={20} className="group-hover:translate-x-1 transition-transform" />
+          </a>
         </div>
       </section>
 
@@ -168,7 +114,7 @@ export default function Index() {
             {["150+", "8", "97%", "40+"].map((v, i) => (
               <AnimatedSection key={i} className="text-center">
                 <div
-                  className="font-oswald text-4xl md:text-5xl font-bold mb-1"
+                  className="font-oswald text-4xl md:text-5xl font-bold"
                   style={{
                     background: "linear-gradient(135deg, #00F5FF, #BF5FFF)",
                     WebkitBackgroundClip: "text",
@@ -211,8 +157,8 @@ export default function Index() {
                     <div className="w-4/5 h-2 rounded-full bg-white/5" />
                     <div className="w-3/5 h-2 rounded-full bg-white/5" />
                   </div>
-                  <div className="mt-5 flex items-center gap-2" style={{ color: s.color }}>
-                    <Icon name="ArrowRight" size={14} />
+                  <div className="mt-5">
+                    <Icon name="ArrowRight" size={14} style={{ color: s.color }} />
                   </div>
                 </div>
               </AnimatedSection>
@@ -288,100 +234,34 @@ export default function Index() {
             </div>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
-            <div className="lg:col-span-3">
-              <AnimatedSection>
-                {!submitted ? (
-                  <form onSubmit={handleSubmit} className="bg-[#0D0F1A] rounded-3xl border border-white/8 p-8 flex flex-col gap-5">
-                    <div>
-                      <input
-                        type="text"
-                        required
-                        placeholder="—"
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-[#00F5FF]/50 transition-colors"
-                      />
-                    </div>
-                    <div>
-                      <input
-                        type="text"
-                        required
-                        placeholder="—"
-                        value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-[#00F5FF]/50 transition-colors"
-                      />
-                    </div>
-                    <div>
-                      <textarea
-                        placeholder="—"
-                        rows={4}
-                        value={formData.message}
-                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-[#00F5FF]/50 transition-colors resize-none"
-                      />
-                    </div>
-                    <button
-                      type="submit"
-                      className="w-full py-4 rounded-xl bg-gradient-to-r from-[#00F5FF] to-[#BF5FFF] text-black font-bold hover:scale-[1.02] transition-transform shadow-[0_0_30px_rgba(0,245,255,0.2)] flex items-center justify-center gap-2"
-                    >
-                      <Icon name="Send" size={18} />
-                    </button>
-                  </form>
-                ) : (
-                  <div className="bg-[#0D0F1A] rounded-3xl border border-[#AAFF00]/20 p-12 flex flex-col items-center justify-center gap-4 text-center min-h-[360px]">
-                    <div className="w-16 h-16 rounded-full bg-[#AAFF00]/10 border border-[#AAFF00]/30 flex items-center justify-center">
-                      <Icon name="CheckCircle" size={32} className="text-[#AAFF00]" />
-                    </div>
-                    <button onClick={() => { setSubmitted(false); setFormData({ name: "", phone: "", message: "" }); }} className="mt-4 text-[#00F5FF] text-sm hover:underline">
-                      <Icon name="RotateCcw" size={16} />
-                    </button>
-                  </div>
-                )}
-              </AnimatedSection>
-            </div>
-
-            <div className="lg:col-span-2 flex flex-col gap-5">
-              {[
-                { icon: "Phone", color: "#00F5FF" },
-                { icon: "Mail", color: "#BF5FFF" },
-                { icon: "MapPin", color: "#AAFF00" },
-                { icon: "Clock", color: "#FF6B6B" },
-              ].map((c, i) => (
-                <AnimatedSection key={i}>
-                  <div className="flex items-start gap-4 p-5 rounded-2xl bg-[#0D0F1A] border border-white/8 hover:border-white/15 transition-colors">
-                    <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: `${c.color}15`, border: `1px solid ${c.color}25` }}>
-                      <Icon name={c.icon as "Phone"} size={18} style={{ color: c.color }} />
-                    </div>
-                    <div className="flex-1 space-y-1 pt-1">
-                      <div className="w-16 h-2 rounded-full bg-white/10" />
-                      <div className="w-28 h-2 rounded-full bg-white/20" />
-                    </div>
-                  </div>
-                </AnimatedSection>
-              ))}
-            </div>
-          </div>
+          <AnimatedSection className="flex justify-center">
+            <a
+              href="https://t.me/teleru2023"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-3 px-12 py-5 rounded-full bg-gradient-to-r from-[#00F5FF] to-[#BF5FFF] text-black font-bold text-lg hover:scale-105 transition-all duration-300 shadow-[0_0_50px_rgba(0,245,255,0.35)]"
+            >
+              <Icon name="Send" size={22} className="group-hover:translate-x-1 transition-transform" />
+            </a>
+          </AnimatedSection>
         </div>
       </section>
 
       {/* FOOTER */}
       <footer className="border-t border-white/5 py-8 px-6">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded bg-gradient-to-br from-[#00F5FF] to-[#BF5FFF] flex items-center justify-center">
-              <Icon name="Zap" size={12} className="text-black" />
-            </div>
+        <div className="max-w-6xl mx-auto flex items-center justify-between">
+          <div className="w-6 h-6 rounded bg-gradient-to-br from-[#00F5FF] to-[#BF5FFF] flex items-center justify-center">
+            <Icon name="Zap" size={12} className="text-black" />
           </div>
           <div className="w-40 h-2 rounded-full bg-white/10" />
-          <div className="flex items-center gap-5">
-            {["Instagram", "Send", "Youtube"].map((ic, i) => (
-              <button key={i} className="text-white/30 hover:text-[#00F5FF] transition-colors">
-                <Icon name={ic as "Send"} size={16} />
-              </button>
-            ))}
-          </div>
+          <a
+            href="https://t.me/teleru2023"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white/30 hover:text-[#00F5FF] transition-colors"
+          >
+            <Icon name="Send" size={16} />
+          </a>
         </div>
       </footer>
     </div>
